@@ -104,9 +104,9 @@ const LoginPage = () => `
   <main class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
       <h1 class="text-2xl font-bold text-center text-blue-600 mb-8">항해플러스</h1>
-      <form id="login-form123">
+      <form id="login-form">
         <div class="mb-4">
-          <input id="userId" type="text" placeholder="사용자 이름" class="w-full p-2 border rounded">
+          <input id="username" type="text" placeholder="사용자 이름" class="w-full p-2 border rounded">
         </div>
         <div class="mb-6">
           <input id="userPw" type="password" placeholder="비밀번호" class="w-full p-2 border rounded">
@@ -127,6 +127,13 @@ const LoginPage = () => `
 const ProfilePage = () => {
   const profile = JSON.parse(localStorage.getItem("profile") || "{}");
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  console.log("profile", profile);
+
+  console.log("user", user);
+  console.log(
+    'document.getElementById("username").value:',
+    document.getElementById("username"),
+  );
   return `
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
@@ -149,7 +156,7 @@ const ProfilePage = () => {
                     id="username"
                     name="username"
                     placeholder="사용자 이름"
-                    value=${profile.username || user.id} 
+                    value="${profile.username || user.username || ""}"
                     class="w-full p-2 border rounded"
                   />
                 </div>
@@ -163,7 +170,7 @@ const ProfilePage = () => {
                     type="email"
                     id="email"
                     name="email"
-                    value=${profile.email || "아무값"} 
+                    value=${profile.email || "aaa"}
                     class="w-full p-2 border rounded"
                   />
                 </div>
@@ -179,7 +186,7 @@ const ProfilePage = () => {
                     rows="4"
                     class="w-full p-2 border rounded"
                   >
-${profile.bio || "아무값"}</textarea
+${profile.bio || "aaa"}</textarea
                   >
                 </div>
                 <button
@@ -228,18 +235,20 @@ window.addEventListener("popstate", render);
 document.addEventListener("DOMContentLoaded", render);
 
 document.addEventListener("submit", (e) => {
-  if (e.target.id == "login-form123") {
+  if (e.target.id == "login-form") {
     e.preventDefault();
     //없으면 새로고침됨.
     console.log("로그인 시도");
-    const id = document.getElementById("userId");
-    const password = document.getElementById("userPw");
+    const id = document.getElementById("username");
+    // const password = document.getElementById("userPw");
 
     localStorage.setItem(
       "user",
       JSON.stringify({
-        id: id.value,
-        password: password.value,
+        username: id.value,
+        // password: password.value,
+        email: "",
+        bio: "",
       }),
     );
 
