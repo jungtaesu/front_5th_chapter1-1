@@ -82,6 +82,20 @@
 
 <!-- 과제에 대한 회고를 작성해주세요 -->
 
+      await user.type(document.getElementById("username"), "testuser");
+데이터가 제대로 안들어온다,
+      loginForm.dispatchEvent(
+        new SubmitEvent("submit", { bubbles: true, cancelable: true }),
+      );
+디버깅 방법 공부
+
+아마 문제가 submit 할때 document.getElementById('')로 들어가다보니 그런듯 ??? 
+
+0324
+    loginForm.addEventListener
+    이렇게 만들어줬더니 엉뚱한4. 컴포넌트 기반 구조 설계 이 고쳐졌네;;
+
+
 ### 기술적 성장
 <!-- 예시
 - 새로 학습한 개념

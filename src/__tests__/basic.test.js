@@ -105,7 +105,7 @@ describe("기본과제 테스트", () => {
       loginForm.dispatchEvent(
         new SubmitEvent("submit", { bubbles: true, cancelable: true }),
       );
-
+      // console.log('loginForm.dispatchEvent', loginForm.dispatchEvent)
       goTo("/profile");
     });
 
@@ -185,14 +185,18 @@ describe("기본과제 테스트", () => {
       goTo("/login");
 
       const loginForm = document.getElementById("login-form");
-
+      console.log("loginForm", loginForm);
       await user.type(document.getElementById("username"), "testuser");
 
       loginForm.dispatchEvent(
         new SubmitEvent("submit", { bubbles: true, cancelable: true }),
       );
-
+      // console.log('user:', user.type(document.getElementById("username"), "testuser"))
       // 로그인 상태
+      console.log(
+        'document.getElementById("username").value:',
+        document.getElementById("username").value,
+      );
       expect(document.body.innerHTML).toContain("로그아웃");
     });
   });
