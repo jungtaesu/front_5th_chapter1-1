@@ -1,4 +1,4 @@
-import Nav from "../components/nav";
+import Nav from "../components/Nav";
 import { Router } from "../utils/router";
 import store from "../store";
 import isLoggedIn from "../utils/islogin";

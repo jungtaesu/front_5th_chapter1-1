@@ -1,6 +1,6 @@
 import postData from "../postData";
-import Post from "../components/post";
-import Nav from "../components/nav";
+import Nav from "../components/Nav";
+import Post from "../components/Post";
 
 const MainPage = () => `
   <div class="bg-gray-100 min-h-screen flex justify-center">
