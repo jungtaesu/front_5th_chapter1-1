@@ -1,4 +1,4 @@
-import isLoggedIn from "../utils/islogin";
+import isLoggedIn from "../utils/Islogin";
 import { Router } from "../utils/router";
 import ProfilePage from "./ProfilePage";
 

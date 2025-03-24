@@ -1,7 +1,7 @@
 import Nav from "../components/Nav";
 import { Router } from "../utils/router";
 import store from "../store";
-import isLoggedIn from "../utils/islogin";
+import isLoggedIn from "../utils/Islogin";
 import LoginPage from "./LoginPage";
 
 const ProfilePage = () => {

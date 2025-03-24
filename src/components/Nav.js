@@ -1,4 +1,4 @@
-import isLoggedIn from "../utils/islogin";
+import isLoggedIn from "../utils/Islogin";
 
 const Nav = () => {
   const isHome = () => {
