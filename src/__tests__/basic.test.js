@@ -193,10 +193,7 @@ describe("기본과제 테스트", () => {
       );
       // console.log('user:', user.type(document.getElementById("username"), "testuser"))
       // 로그인 상태
-      console.log(
-        'document.getElementById("username").value:',
-        document.getElementById("username").value,
-      );
+
       expect(document.body.innerHTML).toContain("로그아웃");
     });
   });

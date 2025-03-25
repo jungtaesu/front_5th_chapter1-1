@@ -3,8 +3,6 @@ import { Router } from "../utils/router";
 import ProfilePage from "./ProfilePage";
 
 const LoginPage = () => {
-  console.log("isLoggedIn", isLoggedIn());
-
   if (isLoggedIn()) {
     console.log("로그인페이지에서 로그인 확인");
     history.pushState(null, "", "/profile");
