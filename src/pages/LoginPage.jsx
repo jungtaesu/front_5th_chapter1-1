@@ -5,8 +5,8 @@ import ProfilePage from "./ProfilePage";
 const LoginPage = () => {
   if (isLoggedIn()) {
     console.log("로그인페이지에서 로그인 확인");
-    history.pushState(null, "", "/profile");
-    Router.render("/profile");
+    history.pushState(null, "", "/");
+    Router.render();
     return ProfilePage();
   }
 
