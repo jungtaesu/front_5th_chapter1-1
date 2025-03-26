@@ -1,6 +1,6 @@
 import Nav from "../components/Nav";
 import { Router } from "../utils/router.js";
-import store from "../store";
+import store from "../store/index.js";
 import isLoggedIn from "../utils/Islogin";
 import LoginPage from "./LoginPage";
 

@@ -1,5 +1,5 @@
-import { Router } from "./router";
-import store from "../store";
+import { Router } from "./router.js";
+import store from "../store/index.js";
 
 window.addEventListener("popstate", () => {
   //url이 바뀔때마다 popstate 이벤트로 URL 변경 감지
