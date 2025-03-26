@@ -1,11 +1,8 @@
 ## 과제 체크포인트
 ### 배포 링크
-<!--
-배포 링크를 적어주세요
-예시: https://<username>.github.io/front-5th-chapter1-1/
-배포가 완료되지 않으면 과제를 통과할 수 없습니다.
-배포 후에 정상 작동하는지 확인해주세요.
--->
+https://jungtaesu.github.io/front_5th_chapter1-1/
+
+
 ### 기본과제
 #### 1) 라우팅 구현:
 - [ ] History API를 사용하여 SPA 라우터 구현

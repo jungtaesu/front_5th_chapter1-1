@@ -11,24 +11,24 @@ const routes = {
 };
 
 export const Router = {
-  RouterType: "main",
+  RouterType: "main", // "hash"로 바꿔도 작동함
+
   render: () => {
-    console.log("window.location.pathname", window.location.pathname);
-    console.log("window.location.hash 해쉬값인가요?", window.location.hash);
     const root = document.getElementById("root");
+
+    // Vite config의 base 값을 자동으로 불러옴
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, ""); // 끝 '/' 제거
     let path;
+
     if (Router.RouterType === "main") {
-      // if(window.location.hash == '') {
-      path = window.location.pathname;
-      if (window.location.pathname.includes("index.hash.html")) {
-        console.log("dadas");
-        path = "/";
-      }
+      // "/front_5th_chapter1-1/profile" → "/profile"
+      path = window.location.pathname.replace(basePath, "") || "/";
     } else if (Router.RouterType === "hash") {
-      // } else if (window.location.hash !== '') {
-      path = window.location.hash.slice(1);
-      console.log("hahs일때 Component 그리기 위한 path값은?", path);
+      path = window.location.hash.slice(1) || "/";
     }
+
+    console.log("라우팅 path →", path);
+
     const Component = routes[path] || routes["*"];
     root.innerHTML = Component();
   },
