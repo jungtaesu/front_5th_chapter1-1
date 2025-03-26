@@ -152,6 +152,7 @@ describe("기본과제 테스트", () => {
 
     it("Header, Footer 컴포넌트가 메인 페이지와 프로필 페이지에 존재하고, 로그인페이지와 에러페이지에는 존재하지 않는다.", async () => {
       goTo("/");
+      console.log("document.body.innerHTML:", document.body.innerHTML);
       expect(document.querySelector("header")).not.toBeFalsy();
       expect(document.querySelector("footer")).not.toBeFalsy();
       expect(document.querySelector("nav")).not.toBeFalsy();
