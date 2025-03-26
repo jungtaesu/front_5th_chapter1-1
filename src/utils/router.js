@@ -24,7 +24,6 @@ export const Router = {
       // if(window.location.hash == '') {
       path = window.location.pathname;
       if (window.location.pathname.includes("index.hash.html")) {
-        console.log("dadas");
         path = "/";
       }
     } else if (Router.RouterType === "hash") {
