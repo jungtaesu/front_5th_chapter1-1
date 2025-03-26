@@ -2,6 +2,16 @@
 ### 배포 링크
 https://jungtaesu.github.io/front_5th_chapter1-1/
 
+<!-- gh-pages 배포할땐 vite.config.js 
+// import { defineConfig } from "vite";
+
+// export default defineConfig({
+//   base: "/front_5th_chapter1-1/",
+// });
+이 상태로 npm run deploy 해야 github -> settings -> pages 에 반영이 된다.
+
+
+ -->
 
 ### 기본과제
 #### 1) 라우팅 구현:

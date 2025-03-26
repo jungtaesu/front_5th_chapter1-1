@@ -11,25 +11,52 @@ const routes = {
 };
 
 export const Router = {
-  RouterType: "main", // "hash"로 바꿔도 작동함
-
+  RouterType: "main",
   render: () => {
-    const root = document.getElementById("root");
+    console.log("window.location.pathname", window.location.pathname);
+    console.log("window.location.hash 해쉬값인가요?", window.location.hash);
 
-    // Vite config의 base 값을 자동으로 불러옴
-    const basePath = import.meta.env.BASE_URL.replace(/\/$/, ""); // 끝 '/' 제거
+    // const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
     let path;
 
+    const root = document.getElementById("root");
     if (Router.RouterType === "main") {
-      // "/front_5th_chapter1-1/profile" → "/profile"
-      path = window.location.pathname.replace(basePath, "") || "/";
+      // if(window.location.hash == '') {
+      path = window.location.pathname;
+      if (window.location.pathname.includes("index.hash.html")) {
+        console.log("dadas");
+        path = "/";
+      }
     } else if (Router.RouterType === "hash") {
-      path = window.location.hash.slice(1) || "/";
+      // } else if (window.location.hash !== '') {
+      path = window.location.hash.slice(1);
+      console.log("hahs일때 Component 그리기 위한 path값은?", path);
     }
-
-    console.log("라우팅 path →", path);
-
     const Component = routes[path] || routes["*"];
     root.innerHTML = Component();
   },
 };
+
+// export const Router = {
+//   RouterType: "main", // "hash"로 바꿔도 작동함
+
+//   render: () => {
+//     const root = document.getElementById("root");
+
+//     // Vite config의 base 값을 자동으로 불러옴
+//     const basePath = import.meta.env.BASE_URL.replace(/\/$/, ""); // 끝 '/' 제거
+//     let path;
+
+//     if (Router.RouterType === "main") {
+//       // "/front_5th_chapter1-1/profile" → "/profile"
+//       path = window.location.pathname.replace(basePath, "") || "/";
+//     } else if (Router.RouterType === "hash") {
+//       path = window.location.hash.slice(1) || "/";
+//     }
+
+//     console.log("라우팅 path →", path);
+
+//     const Component = routes[path] || routes["*"];
+//     root.innerHTML = Component();
+//   },
+// };
