@@ -1,5 +1,5 @@
 import isLoggedIn from "../utils/Islogin";
-import { Router } from "../utils/router";
+import { Router } from "../utils/Router";
 import ProfilePage from "./ProfilePage";
 
 const LoginPage = () => {

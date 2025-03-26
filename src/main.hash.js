@@ -1,5 +1,5 @@
-import { Router } from "./utils/router.js";
-import "./utils/event.js";
+import { Router } from "./utils/Router.js";
+import "./utils/Event.js";
 
 window.addEventListener("hashchange", () => {
   Router.render();
