@@ -79,26 +79,16 @@ ex) hash 와 router 가 가장 크게 어려웠?던 부분 같아요.
 2. 폴더 구조
 이건 배웠다기보다는 다들 가장 많이 사용하는 src -> pages , components, utils, 등등
 
-3.   
-
-
-      await user.type(document.getElementById("username"), "testuser");
-데이터가 제대로 안들어온다,
-      loginForm.dispatchEvent(
-        new SubmitEvent("submit", { bubbles: true, cancelable: true }),
-      );
-디버깅 방법 공부
-아마 문제가 submit 할때 document.getElementById('')로 들어가다보니 그런듯 ???
-0324
-    loginForm.addEventListener
-    이렇게 만들어줬더니 엉뚱한4. 컴포넌트 기반 구조 설계 이 고쳐졌네;;
-hash...
 ### 기술적 성장
 <!-- 예시
 - 새로 학습한 개념
 - 기존 지식의 재발견/심화
 - 구현 과정에서의 기술적 도전과 해결
 -->
+
+해시 라우터 부분이 특히 힘들었습니다. 원래는 import router from 'userRouter' 이렇게만 사용을 했었어서 그저 import만 하면
+끝나는 기능이 router 였는데 이렇게 history API 그리고 hash를 동시에 구현하는것이 성장했다고 생각합니다.
+
 해시 라우팅 vs 히스토리 라우팅
 React Router 같은 클라이언트 라우터를 사용할 때, 두 가지 방식이 있어:
 해시 라우팅 (Hash Routing)
@@ -109,38 +99,80 @@ window.location.hash를 사용해 페이지를 변경함.
 window.history.pushState()를 사용해 페이지를 변경함.
 예: window.history.pushState({}, "", "/login"); → URL이 http://example.com/login으로 변경됨.
 이 방식은 브라우저의 히스토리 스택에 새 상태를 추가하지만, 해시 라우팅처럼 #을 사용하지 않음.
+
 ### 코드 품질
 <!-- 예시
 - 특히 만족스러운 구현
 - 리팩토링이 필요한 부분
 - 코드 설계 관련 고민과 결정
 -->
+
 리팩토링을 마무리했다는 것 자체가 만족스럽습니다...
-해시 라우터 부분이 특히 힘들었습니다.
+아직 품질에 대해서 논할수 있나 싶습니다..ㅎㅎ
+
 ### 학습 효과 분석
 <!-- 예시
 - 가장 큰 배움이 있었던 부분
 - 추가 학습이 필요한 영역
 - 실무 적용 가능성
 -->
+내가 nextjs에서 useRouter로 끌어서 사용하던 부분이 사실 이런 원리로 동작하는구나 라는 걸 알수 있었고,
+
 ### 과제 피드백
 <!-- 예시
 - 과제에서 모호하거나 애매했던 부분
 - 과제에서 좋았던 부분
 -->
+
+아마 제가 부족해서 생긴 이슈이겠지만 testCode가 조금 더 친절..?했음 좋겠다? 말고는 없습니다.
+음 디코에도 남겨놨던 내용이긴 했는데 어쨋든 렌더링 순서 이슈로 인해 null로 잡힌 객체를 참조하려다가 생긴 testcode에서의 에러였지만
+login화면으로 가야 basic에선 통과하고, home으로 가야 e2e테스트에서 통과하는 (물론 제가 더 빨리 buttonClicked event에 대한 정리를 더 깔끔하게 했다면 안생겼을 수도..) 현상을 목격해서 한번 적어봤습니다!
+결국 해결은 각 로그인/로그아웃/프로필/홈 으로 가는 버튼들에 대한 이벤트 정리를 깔끔하게 하니까 해결된 이슈였씁니다.
+
+아래 코드에서 로그아웃 할때 부분입니다.
+
+document.addEventListener("click", (e) => {
+  if (e.target.id === "profile") {
+    console.log("profile클릭!!");
+    window.history.pushState(null, "", "/profile");
+    Router.render("/profile");
+  } else if (e.target.id === "logout") {
+    console.log("로그아웃");
+    // localStorage.removeItem('user')
+    store.deleteState();
+    history.pushState(null, "", "/");
+    Router.render("/");
+  } else if (e.target.id === "login") {
+    console.log("로그인");
+    window.history.pushState(null, "", "/login");
+    Router.render("/login");
+  } else if (e.target.id === "home") {
+    console.log("홈");
+    window.history.pushState(null, "", "/");
+    Router.render("/");
+  }
+});
+
 ## 리뷰 받고 싶은 내용
-<!--
-피드백 받고 싶은 내용을 구체적으로 남겨주세요
-모호한 요청은 피드백을 남기기 어렵습니다.
-참고링크: https://chatgpt.com/share/675b6129-515c-8001-ba72-39d0fa4c7b62
-모호한 질문의 예시)
-- 무엇을 질문해야 할지 몰라서 코치님이 보시기에 고쳐야할것들 전반적으로 피드백 부탁드립니다.
-- 코드 스타일에 대한 피드백 부탁드립니다.
-- 코드 구조에 대한 피드백 부탁드립니다.
-- 개념적인 오류에 대한 피드백 부탁드립니다.
-- 추가 구현이 필요한 부분에 대한 피드백 부탁드립니다.
-구체적인 질문의 예시)
-- 파일A의 함수B와 그 안의 변수명을 보면 직관성이 떨어지는 것 같습니다. 함수와 변수 이름을 더 명확하게 지을 방법에 대해 조언해 주실 수 있나요?
-- 현재 파일 단위로 코드를 분리했지만, 이번 주차 발제를 기준으로 봤을 때 모듈화나 계층화에서 부족함이 있는 것 같습니다. 특히 A와 B 부분에서 모듈화를 더 진행할지 그대로 둘지 고민하였습니다. (...구체적인 고민 사항 적기...). 코치님의 의견이 궁금합니다.
-- 옵저버 패턴을 사용해 상태 관리 로직을 구현해 보려 했습니다. 제가 구현한 코드가 옵저버 패턴에 맞게 잘 구성되었는지 검토해 주시고, 보완할 부분을 제안해 주실 수 있을까요?
-- 컴포넌트 A를 테스트 할 때 B와의 의존성 때문에 테스트 코드를 작성하려다 포기했습니다. A와 B의 의존성을 낮추고 테스트 가능성을 높이는 구조 개선 방안이 있을까요?
+
+1. 제 pr 로그중 하나가 (profile - 이슈 해결중) localStorage 관련한 내용을 중앙관리하지않고 필요할때마다 작성하는 방식으로 user에 대한 정보를 다뤘는데,
+이 방식이 어딘가 틀린지 모른 상태로 뭔가 localStorage를 계속해서 호출하는 게 문제가 생기수 있겠단 추측으로 store/index.js를 만들어서
+거기서 관리해주는 방식으로 바꾸니까 에러가 해결이 되었는데 이러한 이유로 중앙관리를 해야한다는 건 알고 있는데 제가 느낀게 맞는지 궁금합니다.
+(1) 중앙관리를 하는 이유는 디버깅이 편하다
+(2) 중앙관리를 하는 이유는 매번 호출하는 대상을 더 일관적(?) 호출이 가능하다?
+(3) 사실 웹 기능상 봤을때는 웹 브라우저에서는 기능구현이 잘 되었는데 testcode에서 통과가 안된 부분이라 의아합니다.
+
+2. 사실 저는 vscode에서 디버깅 기능을 거의 사용을 안해서 뭔가 console만으로 다 해결을 하는데 개발자로서 약간은 잘못된 부분..인것 같습니다.
+귀찮기도 하고, 사실 console에서 찍어보면 다 나오는데 굳이 라는 ..?
+
+3. eventListener 부분에서
+
+const loginForm = document.getElementById("login-form"); 이렇게 지정해준 상태에서 
+
+loginForm.addEventListner()...
+하는것과
+
+submit 버튼이 두개인 상태에서 submit버튼에대한 이벤틀르 작성하는것이
+document.addEventListener("submit", (e) => {
+
+기능적으로 크게 다른건지 아니면 submit에 대해서 전부 event 등록을 해주더라도 조건문으로 해결하면 기능적 차이가 없는건지 궁금합니다!
